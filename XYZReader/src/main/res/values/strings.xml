@@ -9,5 +9,6 @@
 
     <string name="up">Up</string>
     <string name="thumbnail_image">Thumbnail image</string>
+    <string name="detail_image">Detail Image</string>
 
 </resources>
