@@ -1,9 +1,11 @@
 package com.example.xyzreader.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.palette.graphics.Palette;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -14,15 +16,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
 import com.example.xyzreader.data.ItemsContract;
@@ -167,7 +175,7 @@ public class ArticleListActivity extends AppCompatActivity implements
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
+        public void onBindViewHolder(final ViewHolder holder, int position) {
             mCursor.moveToPosition(position);
             holder.titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
             Date publishedDate = parsePublishedDate();
@@ -178,7 +186,7 @@ public class ArticleListActivity extends AppCompatActivity implements
                                 publishedDate.getTime(),
                                 System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
                                 DateUtils.FORMAT_ABBREV_ALL).toString()
-                                + "<br/>" + " by "
+                                + "<br/>" + " by <font color='#ffffff'>"
                                 + mCursor.getString(ArticleLoader.Query.AUTHOR)));
             } else {
                 holder.subtitleView.setText(Html.fromHtml(
@@ -187,10 +195,30 @@ public class ArticleListActivity extends AppCompatActivity implements
                                 + mCursor.getString(ArticleLoader.Query.AUTHOR)));
             }
 
+            //Set color on Card View
+            ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader()
+                    .get(mCursor.getString(ArticleLoader.Query.THUMB_URL), new ImageLoader.ImageListener() {
+                        @Override
+                        public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
+                            Bitmap bitmap = imageContainer.getBitmap();
+                            if (bitmap != null) {
+                                Palette p = Palette.generate(bitmap, 12);
+                                 int mMutedColor = 0xFF333333;
 
+                                mMutedColor = p.getDarkMutedColor(0xFF333333);
+                                holder.cardView.setCardBackgroundColor(mMutedColor);
+
+                            }
+                        }
+
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+
+                        }
+                    });
 
             Picasso.get().load(mCursor.getString(ArticleLoader.Query.THUMB_URL))
-                    .placeholder(R.color.photo_placeholder)
+                    .placeholder(R.drawable.empty_detail)
                     .into(holder.thumbnailView);
 
 //            holder.thumbnailView.setImageUrl(
@@ -210,6 +238,7 @@ public class ArticleListActivity extends AppCompatActivity implements
         public ImageView thumbnailView;
         public TextView titleView;
         public TextView subtitleView;
+        public CardView cardView;
 
         public ViewHolder(View view) {
             super(view);
@@ -217,6 +246,7 @@ public class ArticleListActivity extends AppCompatActivity implements
             thumbnailView = view.findViewById(R.id.thumbnail);
             titleView = (TextView) view.findViewById(R.id.article_title);
             subtitleView = (TextView) view.findViewById(R.id.article_subtitle);
+            cardView =  view.findViewById(R.id.cardview);
         }
     }
 }
