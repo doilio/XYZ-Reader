@@ -36,39 +36,25 @@
             android:id="@+id/article_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:paddingStart="16dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="16dp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            style="?android:attr/textAppearanceLarge"
-            android:fontFamily="sans-serif-condensed"
             app:layout_constraintBottom_toTopOf="@+id/article_subtitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/thumbnail"
-            tools:text="This is My Title" />
+            tools:text="This is My Title"
+            style="@style/article_title" />
 
         <TextView
             android:id="@+id/article_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="16dp"
-            android:textColor="#8fff"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/article_title"
-            tools:text="This is My Regular Text" />
+            tools:text="This is My Regular Text"
+            style="@style/article_subtitle" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
