@@ -9,9 +9,9 @@
     android:clickable="true"
     android:elevation="2dp"
     android:focusable="true"
-    tools:backgroundTint="@android:color/darker_gray"
     android:foreground="?selectableItemBackground"
-    app:cardCornerRadius="4dp">
+    app:cardCornerRadius="4dp"
+    tools:backgroundTint="@android:color/darker_gray">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -34,6 +34,7 @@
 
         <TextView
             android:id="@+id/article_title"
+            style="@style/article_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/article_subtitle"
@@ -41,11 +42,11 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/thumbnail"
-            tools:text="This is My Title"
-            style="@style/article_title" />
+            tools:text="This is My Title" />
 
         <TextView
             android:id="@+id/article_subtitle"
+            style="@style/article_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -53,8 +54,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/article_title"
-            tools:text="This is My Regular Text"
-            style="@style/article_subtitle" />
+            tools:text="This is My Regular Text" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
