@@ -35,6 +35,7 @@
         <item name="android:paddingEnd">@dimen/padding_normal</item>
         <item name="android:paddingBottom">@dimen/padding_normal</item>
         <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body2</item>
     </style>
 
@@ -45,6 +46,7 @@
         <item name="android:paddingTop">@dimen/padding_normal</item>
         <item name="android:paddingEnd">@dimen/padding_normal</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_title</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
@@ -73,6 +75,7 @@
     <style name="article_by_line_detail">
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body2</item>
         <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
     </style>
 
     <style name="article_body_detail">
